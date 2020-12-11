@@ -1,1 +1,1 @@
-This fold is about edx course data science
+This folder is about edx course data science
