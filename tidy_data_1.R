@@ -25,3 +25,13 @@ Japan <- new_fertility_data %>% filter(`Country Name`=="Japan")
 World <- new_fertility_data %>%filter(`Country Name`=="World")
 
 ggplot(data=World,aes(x=year, y=fertility))+geom_point()
+ggplot(data=Japan,aes(x=year,y=fertility))+geom_point()
+
+Japan_World <- new_fertility_data %>% 
+  filter(`Country Name`%in% c("Japan", "World"))
+Japan_World$
+
+ggplot(data=Japan_World, aes(x=year,y=fertility,col= `Country Name`))+
+  geom_point() +
+  ggtitle("Fertility Comparison")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
