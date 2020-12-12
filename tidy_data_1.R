@@ -35,3 +35,20 @@ ggplot(data=Japan_World, aes(x=year,y=fertility,col= `Country Name`))+
   geom_point() +
   ggtitle("Fertility Comparison")+
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+
+# how to use "separate","unite" function
+path <- system.file("extdata", package = "dslabs")
+filename <- file.path(path, "life-expectancy-and-fertility-two-countries-example.csv")
+raw_dat <-read_csv(filename)
+
+dat <- raw_dat %>% gather(key, value, -country)
+dat %>% separate(key, c("year", "variable_name"))
+new_dat <- dat %>% separate(key, c("year", "variable_name"), 
+                 sep = "_", extra="merge") %>%
+  spread(variable_name, value)
+
+ggplot(data=new_dat)+
+  geom_point(aes(year, fertility,col=country))+
+  geom_point(aes(year, life_expectancy,col=country))+
+  theme(axis.text.x = element_text(angle=90, hjust=1))
